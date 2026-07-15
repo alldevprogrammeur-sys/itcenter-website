@@ -21,7 +21,7 @@ permet leur réutilisation sur des modèles hétérogènes.
 
 from typing import Tuple
 
-from django import admin
+from django.contrib import admin
 from django.contrib import messages
 from django.core.exceptions import FieldDoesNotExist
 from django.db.models import Model
