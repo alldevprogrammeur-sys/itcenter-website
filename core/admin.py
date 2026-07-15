@@ -28,6 +28,9 @@ from .admin_mixins import (
     AdminActionsMixin,
 )
 
+from django.contrib import admin
+from .models import Membre
+
 
 def _model_has_field(model, field_name: str) -> bool:
     """
@@ -249,3 +252,9 @@ class PosteAdmin(
         (_("Description"), {"fields": ("description", "image")}),
         (_("Audit"), {"fields": tuple(f for f in ("created_at", "updated_at") if _model_has_field(core_models.Poste, f)), "classes": ("collapse",)}),
     )
+
+
+@admin.register(Membre)
+class MembreAdmin(admin.ModelAdmin):
+    # Remplace 'nom' et 'prenom' par les vrais noms de champs de ton modèle Membre
+    search_fields = ['nom', 'prenom']
