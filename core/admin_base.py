@@ -98,10 +98,20 @@ class BaseAdmin(admin.ModelAdmin):
         """
         Retourne readonly_fields filtrés pour exclure tout champ absent sur
         le modèle (prévention d'erreurs si le modèle n'a pas created_at/updated_at).
+
+        Amélioration : conserve également les noms qui correspondent à des
+        attributs ou méthodes du ModelAdmin (par ex. image_preview fourni par
+        un mixin). Cela évite de retirer les readonly_fields basés sur des
+        méthodes d'affichage et prévient FieldError lors de l'utilisation de
+        mixins additionnels.
         """
         readonly = list(super().get_readonly_fields(request, obj) or [])
         filtered = []
         for field in readonly:
-            if self._model_has_field(field):
+            # 1) Si le modèle expose le champ → le conserver.
+            # 2) Sinon, si le ModelAdmin (ou un mixin) possède un attribut/méthode
+            #    de ce nom → le conserver (permet image_preview, pdf_preview, etc.).
+            # 3) Sinon → le retirer.
+            if self._model_has_field(field) or hasattr(self, field):
                 filtered.append(field)
         return tuple(filtered)
