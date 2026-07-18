@@ -258,3 +258,39 @@ class PosteAdmin(
 class MembreAdmin(admin.ModelAdmin):
     # Remplace 'nom' et 'prenom' par les vrais noms de champs de ton modèle Membre
     search_fields = ['nom', 'prenom']
+
+@admin.register(core_models.Departement)
+class DepartementAdmin(
+    TimestampAdminMixin,
+    SlugAdminMixin,
+    ImagePreviewMixin,
+    BaseAdmin,
+):
+    """
+    Admin pour Departement (core.models.Departement).
+
+    - Utilise uniquement les champs réels du modèle.
+    - Affiche un aperçu de l'image (image_preview) dans la liste et le formulaire.
+    - Préremplit le champ `slug` à partir de `nom_fr`.
+    - Optimisé, lisible et conforme aux bonnes pratiques du projet.
+    """
+
+    show_full_result_count = True
+
+    list_display = ("image_preview", "nom_fr", "nom_en", "slug")
+    list_display_links = ("nom_fr",)
+    search_fields = ("nom_fr", "nom_en", "slug")
+    ordering = ("nom_fr",)
+
+    # Prepopulate slug from the French name (fields exist on the model)
+    prepopulated_fields = {"slug": ("nom_fr",)}
+
+    # Image preview is readonly; timestamps handled by TimestampAdminMixin
+    readonly_fields = ("image_preview",)
+
+    fieldsets = (
+        (None, {"fields": ("nom_fr", "nom_en", "slug")}),
+        (_("Description"), {"fields": ("description",)}),
+        (_("Illustration"), {"fields": ("image", "image_preview")}),
+        (_("Audit"), {"fields": ("created_at", "updated_at"), "classes": ("collapse",)}),
+    )
