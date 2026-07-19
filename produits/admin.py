@@ -47,8 +47,6 @@ class ProduitMediaInline(ImagePreviewMixin, PDFPreviewMixin, admin.StackedInline
         "type_media",
         "titre_fr",
         "titre_en",
-        "description_fr",
-        "description_en",
         "image",
         "video_url",
         "document",
