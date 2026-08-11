@@ -1,0 +1,41 @@
+/* base.css — fondation légère pour IT CENTER */
+
+/* Global base */
+:root {
+  --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --text-color: #212529;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--body-font);
+  color: var(--text-color);
+  background-color: #fff;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure main content is readable on mobile */
+main#main-content {
+  min-height: 60vh;
+}
+
+/* Accessible focus outline */
+a:focus, button:focus, input:focus, textarea:focus {
+  outline: 3px solid rgba(13,110,253,0.25);
+  outline-offset: 2px;
+}
+
+/* Navbar brand image sizing */
+.navbar-brand img {
+  max-height: 36px;
+}
+
+/* Footer minor styles */
+footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}

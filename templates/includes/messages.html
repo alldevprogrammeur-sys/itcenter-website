@@ -1,9 +1,21 @@
+{% load i18n %}
 {% if messages %}
-
-    {% for message in messages %}
-
-        {{ message }}
-
-    {% endfor %}
-
+  <div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="position-absolute top-0 end-0 p-3" style="z-index: 1080;">
+      {% for message in messages %}
+        {% if 'error' in message.tags %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {% elif 'warning' in message.tags %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% elif 'success' in message.tags %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {% else %}
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {% endif %}
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Close' %}"></button>
+          </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endif %}
