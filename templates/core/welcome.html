@@ -1,11 +1,99 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Bienvenue" %} | IT CENTER{% endblock %}
+{% block meta_description %}{% trans "Page d'accueil - IT CENTER" %}{% endblock %}
 
 {% block content %}
+  <div class="row">
+    <div class="col-12">
+      <h1>{% trans "Bienvenue sur IT CENTER" %}</h1>
+      <p class="lead">{% trans "Fondation technique : vérification des données disponibles." %}</p>
+    </div>
+  </div>
 
-<h1>Bienvenue chez IT CENTER</h1>
+  <section class="row my-4">
+    <div class="col-12 col-md-4">
+      <h3>{% trans "Formations actives" %}</h3>
+      <p>{{ formations_active_count }}</p>
+    </div>
+    <div class="col-12 col-md-4">
+      <h3>{% trans "Formations certifiantes" %}</h3>
+      <p>{{ formations_certifiantes_count }}</p>
+    </div>
+    <div class="col-12 col-md-4">
+      <h3>{% trans "Réalisations actives" %}</h3>
+      <p>{{ realisations_active_count }}</p>
+    </div>
+  </section>
 
-<p>
-Au cœur de la transformation digitale
-</p>
+  <section class="row my-4">
+    <div class="col-12">
+      <h2>{% trans "Témoignages" %}</h2>
+      {% if temoignages.exists %}
+        <ul class="list-unstyled">
+          {% for t in temoignages %}
+            <li class="mb-3">
+              <strong>
+                {# Affichage du nom complet conforme aux champs disponibles #}
+                {{ t.nom }}{% if t.postnom %} {{ t.postnom }}{% endif %}{% if t.prenom %} {{ t.prenom }}{% endif %}
+                {% if t.entreprise %} — <em>{{ t.entreprise }}</em>{% endif %}
+              </strong>
+              <div class="mt-1">
+                {# Afficher message en français si langue active = "fr", sinon message_en s'il existe #}
+                {% if current_language and current_language|slice:":2" == "fr" %}
+                  {{ t.message_fr|default:t.message_en|default:_("Aucun message") }}
+                {% else %}
+                  {{ t.message_en|default:t.message_fr|default:_("Aucun message") }}
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">{% trans "Aucun témoignage disponible pour l'instant." %}</p>
+      {% endif %}
+    </div>
+  </section>
 
+  <section class="row my-4">
+    <div class="col-12">
+      <h2>{% trans "Formations mises en avant" %}</h2>
+      {% if featured_formations %}
+        <ul>
+          {% for f in featured_formations %}
+            <li>
+              {% if current_language and current_language|slice:":2" == "fr" %}
+                {{ f.nom_fr }}
+              {% else %}
+                {{ f.nom_en|default:f.nom_fr }}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">{% trans "Aucune formation mise en avant pour le moment." %}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="row my-4">
+    <div class="col-12">
+      <h2>{% trans "Réalisations mises en avant" %}</h2>
+      {% if featured_realisations %}
+        <ul>
+          {% for r in featured_realisations %}
+            <li>
+              {% if current_language and current_language|slice:":2" == "fr" %}
+                {{ r.nom_fr }}
+              {% else %}
+                {{ r.nom_en|default:r.nom_fr }}
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">{% trans "Aucune réalisation mise en avant pour le moment." %}</p>
+      {% endif %}
+    </div>
+  </section>
 {% endblock %}
