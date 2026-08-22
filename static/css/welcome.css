@@ -1,0 +1,386 @@
+/* static/css/welcome.css
+   Hero visual for core/welcome.html
+   Adjusted so .hero-section becomes full-bleed even when rendered inside a .container
+   and to remove any white gap between the navbar and the hero on the Welcome page.
+*/
+
+
+/* APRÈS — couvre aussi le cas "pas de navbar" (Welcome) */
+nav + .container.mt-3,
+.container.mt-3:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+
+#main-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.hero-section {
+  margin-top: 0 !important;
+}
+
+/* APRÈS — plus besoin du hack vw : main n'est plus contraint par .container sur Welcome */
+.hero-section {
+  background: #0A192F;
+  color: #ffffff;
+  padding-top: 3.5rem;
+  padding-bottom: 2.5rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-text {
+  color: #e6f0ff;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* badge — texte, structure et espacement inchangés ; typographie consolidée */
+.hero-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, rgba(0,210,255,0.12), rgba(37,99,235,0.08));
+  color: #cfefff;
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  letter-spacing: .02em;
+  box-shadow: 0 4px 18px rgba(0,210,255,0.04);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+}
+
+/* Title — taille/clamp/majuscules inchangés ; typographie consolidée */
+.hero-title {
+  font-size: clamp(1.8rem, 4.5vw, 3.6rem);
+  line-height: 1.02;
+  margin-top: 1rem;
+  margin-bottom: .8rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-shadow: 0 6px 30px rgba(2,6,23,0.6);
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+}
+
+/* Subtitle — taille/couleur/max-width inchangés ; typographie consolidée */
+.hero-subtitle {
+  color: rgba(230,240,255,0.9);
+  font-size: 1.05rem;
+  max-width: 58ch;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+/* CTAs — comportement/tailles inchangés ; typographie consolidée */
+.hero-ctas .btn {
+  min-width: 200px;
+  padding: .7rem 1rem;
+  border-radius: 10px;
+  transition: transform .18s ease, box-shadow .18s ease;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+}
+
+.btn-discover {
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(37,99,235,0.18);
+}
+.btn-discover:hover,
+.btn-discover:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(37,99,235,0.26);
+}
+
+.btn-forms {
+  color: #e6f0ff;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: transparent;
+}
+.btn-forms:hover,
+.btn-forms:focus {
+  background: rgba(255,255,255,0.03);
+  transform: translateY(-2px);
+}
+
+/* -----------------------------
+   Digital Core — unchanged rules (kept as in the project)
+   ----------------------------- */
+
+.digital-core {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4rem;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.dc-svg {
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+  display: block;
+}
+
+.dc-halo {
+  transform-origin: 250px 250px;
+  filter: blur(14px);
+  opacity: 0.94;
+  animation: haloPulse 12s ease-in-out infinite;
+}
+
+.rings { transform-origin: center; animation: ringsRotate 28s linear infinite; }
+.ring-inner-dash { transform-origin: center; animation: ringsRotateReverse 20s linear infinite; }
+
+.circuit-line {
+  stroke-linecap: round;
+  stroke-opacity: 0.98;
+  stroke-dasharray: 6 10;
+  stroke-dashoffset: 0;
+  animation: circuitFlow 6.6s linear infinite;
+}
+
+.circuit-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 6px rgba(0,210,255,0.16));
+  animation: dotPulse 3.6s ease-in-out infinite;
+}
+
+.c1 .circuit-dot { animation-delay: 0s; }
+.c2 .circuit-dot { animation-delay: 0.2s; }
+.c3 .circuit-dot { animation-delay: 0.35s; }
+.c4 .circuit-dot { animation-delay: 0.15s; }
+.c5 .circuit-dot { animation-delay: 0.45s; }
+.c6 .circuit-dot { animation-delay: 0.3s; }
+
+.data-bars .bar {
+  transform-origin: center bottom;
+  transition: transform 360ms cubic-bezier(.2,.8,.2,1);
+  opacity: 0.95;
+  animation: barPulseVar 3.8s ease-in-out infinite;
+}
+
+.data-bars .b1 { animation-delay: 0.05s; }
+.data-bars .b2 { animation-delay: 0.18s; }
+.data-bars .b3 { animation-delay: 0.35s; }
+.data-bars .b4 { animation-delay: 0.10s; }
+.data-bars .b5 { animation-delay: 0.22s; }
+.data-bars .b6 { animation-delay: 0.12s; }
+.data-bars .b7 { animation-delay: 0.28s; }
+
+.core { transform-origin: center; animation: coreRotate 13s linear infinite; }
+.sphere { transform-origin: center; }
+.sphere-mesh { transform-origin: center; mix-blend-mode: screen; opacity: 0.55; animation: meshDrift 9s linear infinite; }
+.core-glow { transform-origin: center; opacity: 0.85; }
+
+.core-center { transform-origin: center; animation: centerPulse 3.6s ease-in-out infinite; filter: drop-shadow(0 0 10px rgba(0,210,255,0.22)); }
+
+@keyframes haloPulse {
+  0% { transform: scale(1); opacity: 0.95; }
+  50% { transform: scale(1.03); opacity: 0.78; }
+  100% { transform: scale(1); opacity: 0.95; }
+}
+@keyframes ringsRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes ringsRotateReverse {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+@keyframes circuitFlow {
+  0% { stroke-dashoffset: 0; opacity: 0.95; }
+  50% { stroke-dashoffset: 18; opacity: 0.7; }
+  100% { stroke-dashoffset: 0; opacity: 0.95; }
+}
+@keyframes dotPulse {
+  0% { transform: translateY(0) scale(1); opacity: 0.9; }
+  50% { transform: translateY(-6px) scale(1.18); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 0.9; }
+}
+@keyframes meshDrift {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.55; }
+  50% { transform: rotate(18deg) scale(1.01); opacity: 0.64; }
+  100% { transform: rotate(0deg) scale(1); opacity: 0.55; }
+}
+@keyframes coreRotate {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+@keyframes centerPulse {
+  0% { transform: scale(1); opacity: 0.96; }
+  50% { transform: scale(1.22); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.96; }
+}
+@keyframes barPulseVar {
+  0% { transform: scaleY(0.78); opacity: 0.86; }
+  40% { transform: scaleY(1.06); opacity: 1; }
+  70% { transform: scaleY(0.9); opacity: 0.92; }
+  100% { transform: scaleY(0.78); opacity: 0.86; }
+}
+
+@media (max-width: 991.98px) {
+  .digital-core { max-width: 420px; }
+  .dc-svg { max-width: 380px; }
+  .dc-halo { filter: blur(10px); opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dc-halo,
+  .rings,
+  .ring-inner-dash,
+  .circuit-line,
+  .circuit-dot,
+  .data-bars .bar,
+  .core,
+  .sphere-mesh,
+  .core-center {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* -----------------------------
+   Hero: Statistiques (FINAL) — compact cards design
+   ----------------------------- */
+
+:root {
+  --stats-font-stack: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --stats-cyan: #00D2FF;
+  --stats-label-color: rgba(255,255,255,0.88);
+  --stats-card-bg: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));
+  --stats-card-border: rgba(255,255,255,0.035);
+}
+
+.stat-card, .stat-card * {
+  font-family: var(--stats-font-stack);
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  align-items: stretch;
+  margin-top: 1.5rem;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.stat-card {
+  box-sizing: border-box;
+  background: var(--stats-card-bg);
+  border: 1px solid var(--stats-card-border);
+  border-radius: 12px;
+  padding: 0.6rem 0.9rem;
+  flex: 1 1 0;
+  min-width: 140px;
+  max-width: none;
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  box-shadow: 0 8px 30px rgba(2,8,20,0.42);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  position: relative;
+  overflow: visible;
+}
+
+.stat-card .stat-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  gap: 0.12rem;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: inline-grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(0,210,255,0.04), rgba(37,99,235,0.04));
+  flex: 0 0 48px;
+}
+
+.stat-number {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  line-height: 1;
+}
+
+.stat-value { font-size: 1.05rem; font-weight: 800; color: var(--stats-cyan); white-space: nowrap; }
+.stat-plus  { font-size: 0.92rem; font-weight: 800; margin-left: -4px; color: var(--stats-cyan); }
+.stat-label { font-size: 0.78rem; font-weight: 700; color: var(--stats-label-color); white-space: normal; line-height: 1.05; margin-top: 2px; }
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 48px rgba(2,8,20,0.58);
+  border-color: rgba(0,210,255,0.12);
+}
+.stat-card::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  bottom: -8px;
+  width: 26%;
+  height: 60%;
+  background: radial-gradient(circle at 30% 30%, rgba(0,210,255,0.035), transparent 40%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform .18s ease, opacity .18s ease;
+  opacity: 0;
+}
+.stat-card:hover::after { transform: translateY(-6px) scale(1.02); opacity: 1; }
+
+@keyframes statFadeUp { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
+.stat-card { opacity: 0; transform: translateY(6px); animation: statFadeUp .45s cubic-bezier(.2,.9,.15,1) forwards; }
+.stat-card:nth-child(1) { animation-delay: 0.04s; }
+.stat-card:nth-child(2) { animation-delay: 0.10s; }
+.stat-card:nth-child(3) { animation-delay: 0.16s; }
+
+@media (max-width: 991.98px) {
+  .hero-stats { flex-wrap: wrap; }
+  .stat-card  { flex: 0 1 48%; min-width: 160px; max-width: none; }
+  .stat-value { font-size: 1.0rem; }
+  .stat-label { font-size: 0.78rem; }
+}
+
+@media (max-width: 575.98px) {
+  .hero-stats { gap: 0.6rem; }
+  .stat-card  { flex: 1 1 100%; width: 100%; min-width: 0; padding: 0.5rem 0.7rem; }
+  .stat-icon  { width: 40px; height: 40px; flex: 0 0 40px; }
+  .stat-value { font-size: 0.98rem; }
+  .stat-plus  { font-size: 0.85rem; margin-left: -3px; }
+  .stat-label { font-size: 0.78rem; line-height: 1.1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-card, .stat-card::after { animation: none !important; transition: none !important; transform: none !important; }
+}
+
+/* Accessibility: keep subtitle readable on small screens */
+@media (max-width: 575.98px) {
+  .hero-subtitle { line-height: 1.35; }
+}

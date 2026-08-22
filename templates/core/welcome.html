@@ -1,99 +1,219 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
+
+{% block navbar %}{% endblock %}
+{% block main_class %}flex-grow-1{% endblock %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/welcome.css' %}">
+{% endblock %}
+
 {% block title %}{% trans "Bienvenue" %} | IT CENTER{% endblock %}
 {% block meta_description %}{% trans "Page d'accueil - IT CENTER" %}{% endblock %}
 
 {% block content %}
-  <div class="row">
-    <div class="col-12">
-      <h1>{% trans "Bienvenue sur IT CENTER" %}</h1>
-      <p class="lead">{% trans "Fondation technique : vérification des données disponibles." %}</p>
-    </div>
-  </div>
 
-  <section class="row my-4">
-    <div class="col-12 col-md-4">
-      <h3>{% trans "Formations actives" %}</h3>
-      <p>{{ formations_active_count }}</p>
-    </div>
-    <div class="col-12 col-md-4">
-      <h3>{% trans "Formations certifiantes" %}</h3>
-      <p>{{ formations_certifiantes_count }}</p>
-    </div>
-    <div class="col-12 col-md-4">
-      <h3>{% trans "Réalisations actives" %}</h3>
-      <p>{{ realisations_active_count }}</p>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero-section" role="region" aria-label="{% trans 'Hero principal' %}">
+  <div class="hero-inner container-fluid">
+    <div class="row align-items-center gy-4">
+      <!-- Left: Texte principal -->
+      <div class="col-12 col-lg-6 hero-text px-4">
+        <div class="hero-badge" aria-hidden="true">
+          {% trans "L'Innovation Tech en RDC & Connectée au Monde" %}
+        </div>
 
-  <section class="row my-4">
-    <div class="col-12">
-      <h2>{% trans "Témoignages" %}</h2>
-      {% if temoignages.exists %}
-        <ul class="list-unstyled">
-          {% for t in temoignages %}
-            <li class="mb-3">
-              <strong>
-                {# Affichage du nom complet conforme aux champs disponibles #}
-                {{ t.nom }}{% if t.postnom %} {{ t.postnom }}{% endif %}{% if t.prenom %} {{ t.prenom }}{% endif %}
-                {% if t.entreprise %} — <em>{{ t.entreprise }}</em>{% endif %}
-              </strong>
-              <div class="mt-1">
-                {# Afficher message en français si langue active = "fr", sinon message_en s'il existe #}
-                {% if current_language and current_language|slice:":2" == "fr" %}
-                  {{ t.message_fr|default:t.message_en|default:_("Aucun message") }}
-                {% else %}
-                  {{ t.message_en|default:t.message_fr|default:_("Aucun message") }}
-                {% endif %}
+        <h1 class="hero-title">
+          {% trans "AU CŒUR DE LA TRANSFORMATION DIGITALE." %}
+        </h1>
+
+        <!-- Remplace l'ancien <p class="hero-subtitle"> par ceci -->
+        <p class="hero-subtitle">
+          {% trans "De l'idée au déploiement, IT CENTER accompagne vos projets informatiques. Solutions sur mesure en Cybersécurité, Réseaux, Développement Logiciel et Formations certifiantes." %}
+        </p>
+
+        <div class="hero-ctas d-flex flex-column flex-sm-row gap-2 mt-4">
+          <a class="btn btn-primary btn-discover" href="/services/">
+            {% trans "Découvrir nos solutions" %}
+          </a>
+          <a class="btn btn-outline-light btn-forms" href="/formations/">
+            {% trans "Nos formations" %}
+          </a>
+        </div>
+
+        <!-- Statistiques (en bas à gauche du Hero) - compact + plus sign, label raccourci "Certifications" -->
+        <div class="hero-stats d-flex flex-wrap gap-3 mt-5" aria-hidden="false">
+          <!-- Card 1 -->
+          <div class="stat-card d-flex align-items-center" role="group" aria-label="{% trans 'Formations actives' %}">
+            <div class="stat-icon" aria-hidden="true">
+              <!-- small plus mark icon style intentionally omitted here; icon purely decorative -->
+              <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 2 L15 7 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 7 Z" fill="#00D2FF"/>
+              </svg>
+            </div>
+
+            <div class="stat-body">
+              <div class="stat-number">
+                <span class="stat-value" data-target="{{ formations_active_count }}">{{ formations_active_count }}</span><span class="stat-plus">+</span>
               </div>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="text-muted">{% trans "Aucun témoignage disponible pour l'instant." %}</p>
-      {% endif %}
-    </div>
-  </section>
+              <div class="stat-label">{% trans "Formations" %}</div>
+            </div>
+          </div>
 
-  <section class="row my-4">
-    <div class="col-12">
-      <h2>{% trans "Formations mises en avant" %}</h2>
-      {% if featured_formations %}
-        <ul>
-          {% for f in featured_formations %}
-            <li>
-              {% if current_language and current_language|slice:":2" == "fr" %}
-                {{ f.nom_fr }}
-              {% else %}
-                {{ f.nom_en|default:f.nom_fr }}
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="text-muted">{% trans "Aucune formation mise en avant pour le moment." %}</p>
-      {% endif %}
-    </div>
-  </section>
+          <!-- Card 2: label shortened to "Certifications" -->
+          <div class="stat-card d-flex align-items-center" role="group" aria-label="{% trans 'Formations certifiantes' %}">
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 2a4 4 0 0 1 4 4v3h3v2h-3v3a4 4 0 1 1-8 0v-3H5v-2h3V6a4 4 0 0 1 4-4z" fill="#2563EB"/>
+              </svg>
+            </div>
 
-  <section class="row my-4">
-    <div class="col-12">
-      <h2>{% trans "Réalisations mises en avant" %}</h2>
-      {% if featured_realisations %}
-        <ul>
-          {% for r in featured_realisations %}
-            <li>
-              {% if current_language and current_language|slice:":2" == "fr" %}
-                {{ r.nom_fr }}
-              {% else %}
-                {{ r.nom_en|default:r.nom_fr }}
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="text-muted">{% trans "Aucune réalisation mise en avant pour le moment." %}</p>
-      {% endif %}
-    </div>
-  </section>
+            <div class="stat-body">
+              <div class="stat-number">
+                <span class="stat-value" data-target="{{ formations_certifiantes_count }}">{{ formations_certifiantes_count }}</span><span class="stat-plus">+</span>
+              </div>
+              <div class="stat-label">{% trans "Certifications" %}</div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="stat-card d-flex align-items-center" role="group" aria-label="{% trans 'Réalisations' %}">
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M3 13h4v-2H3v2zm0 6h4v-2H3v2zm0-12h4V5H3v2zm6 12h12v-2H9v2zm0-6h12v-2H9v2zm0-8v2h12V5H9z" fill="#00D2FF"/>
+              </svg>
+            </div>
+
+            <div class="stat-body">
+              <div class="stat-number">
+                <span class="stat-value" data-target="{{ realisations_active_count }}">{{ realisations_active_count }}</span><span class="stat-plus">+</span>
+              </div>
+              <div class="stat-label">{% trans "Réalisations" %}</div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- /.col (left) -->
+
+      <!-- Right: Digital Core (UNMODIFIED) -->
+      <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center px-4">
+        <div class="digital-core" aria-hidden="true" title="{% trans 'Digital Core' %}">
+          <!-- SVG kept as previously (unchanged content) -->
+          <svg class="dc-svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" role="img" aria-hidden="true">
+            <defs>
+              <!-- Gradients & filters -->
+              <linearGradient id="gCore" x1="0" x2="1">
+                <stop offset="0%" stop-color="#00D2FF"/>
+                <stop offset="100%" stop-color="#2563EB"/>
+              </linearGradient>
+
+              <radialGradient id="gSphere" cx="50%" cy="48%" r="60%">
+                <stop offset="0%" stop-color="#00D2FF" stop-opacity="0.96"/>
+                <stop offset="50%" stop-color="#2563EB" stop-opacity="0.92"/>
+                <stop offset="100%" stop-color="#081525" stop-opacity="1"/>
+              </radialGradient>
+
+              <radialGradient id="gHalo" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#00D2FF" stop-opacity="0.30"/>
+                <stop offset="55%" stop-color="#2563EB" stop-opacity="0.14"/>
+                <stop offset="100%" stop-color="#0A192F" stop-opacity="0"/>
+              </radialGradient>
+
+              <filter id="fSoft" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="8" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+
+              <!-- small dot mesh to give texture (light, sparse) -->
+              <pattern id="meshDots" width="12" height="12" patternUnits="userSpaceOnUse">
+                <circle cx="6" cy="6" r="0.9" fill="#00D2FF" opacity="0.18"/>
+              </pattern>
+            </defs>
+
+            <!-- HALO (behind everything; does NOT rotate with assembly) -->
+            <g class="dc-halo-layer" transform="translate(0,0)">
+              <circle class="dc-halo" cx="250" cy="250" r="170" fill="url(#gHalo)"/>
+            </g>
+
+            <!-- GLOBAL ASSEMBLY (rotates as one unit around center 250,250) -->
+            <g class="dc-assembly" transform="translate(250,250)">
+
+              <!-- RINGS (visual depth) -->
+              <g class="rings" aria-hidden="true">
+                <circle class="ring-outer" r="150" fill="none" stroke="url(#gCore)" stroke-width="1.8" stroke-opacity="0.14"/>
+                <circle class="ring-dashed" r="112" fill="none" stroke="#00D2FF" stroke-width="1.0" stroke-dasharray="5 18" stroke-opacity="0.10"/>
+              </g>
+
+              <!-- CIRCUITS (paths start at center 0,0 so sphere rendered AFTER masks inner part) -->
+              <g class="circuits" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                <g class="c c1">
+                  <path class="circuit" d="M0,0 L0,-38 L0,-110 L0,-150" stroke="url(#gCore)" stroke-width="1.8" fill="none"/>
+                  <circle class="c-end" cx="0" cy="-150" r="3.4" fill="#00D2FF"/>
+                </g>
+
+                <g class="c c2">
+                  <path class="circuit" d="M0,0 L34,-20 L120,-64 L170,-88" stroke="url(#gCore)" stroke-width="1.6" fill="none"/>
+                  <circle class="c-end" cx="170" cy="-88" r="3.0" fill="#FFD700"/>
+                </g>
+
+                <g class="c c3">
+                  <path class="circuit" d="M0,0 L68,22 L150,78 L198,118" stroke="url(#gCore)" stroke-width="1.6" fill="none"/>
+                  <circle class="c-end" cx="198" cy="118" r="2.8" fill="#00D2FF"/>
+                </g>
+
+                <g class="c c4">
+                  <path class="circuit" d="M0,0 L-26,38 L-26,110 L-26,160" stroke="url(#gCore)" stroke-width="1.6" fill="none"/>
+                  <circle class="c-end" cx="-26" cy="160" r="3.0" fill="#00D2FF"/>
+                </g>
+
+                <g class="c c5">
+                  <path class="circuit" d="M0,0 L-68,12 L-142,44 L-188,74" stroke="url(#gCore)" stroke-width="1.4" fill="none"/>
+                  <circle class="c-end" cx="-188" cy="74" r="2.8" fill="#FFD700"/>
+                </g>
+
+                <g class="c c6">
+                  <path class="circuit" d="M0,0 L-84,-28 L-146,-72 L-192,-102" stroke="url(#gCore)" stroke-width="1.4" fill="none"/>
+                  <circle class="c-end" cx="-192" cy="-102" r="2.6" fill="#00D2FF"/>
+                </g>
+              </g>
+
+              <!-- DATA BARS (equalizer-like) - rotate with assembly -->
+              <g class="data-bars" aria-hidden="true">
+                <rect class="bar bar1" x="-62" y="-170" width="8" height="36" rx="2" fill="#2563EB" />
+                <rect class="bar bar2" x="-46" y="-190" width="6" height="56" rx="2" fill="#00D2FF" />
+                <rect class="bar bar3" x="-30" y="-160" width="6" height="26" rx="2" fill="#2563EB" />
+                <rect class="bar bar4" x="110" y="-60" width="6" height="38" rx="2" fill="#00D2FF" />
+                <rect class="bar bar5" x="130" y="-30" width="6" height="26" rx="2" fill="#2563EB" />
+                <rect class="bar bar6" x="-8" y="110" width="6" height="38" rx="2" fill="#00D2FF" />
+                <rect class="bar bar7" x="10" y="90" width="6" height="58" rx="2" fill="#2563EB" />
+              </g>
+
+              <!-- CORE (rendered last so it visually covers the inner parts of circuits) -->
+              <g class="core" aria-hidden="true">
+                <!-- subtle inner glow ring -->
+                <circle class="core-glow" cx="0" cy="0" r="76" fill="none" stroke="url(#gCore)" stroke-width="3.6" stroke-opacity="0.72" filter="url(#fSoft)"/>
+                <!-- main sphere -->
+                <circle class="sphere" cx="0" cy="0" r="66" fill="url(#gSphere)"/>
+                <!-- mesh overlay for volume -->
+                <circle class="mesh" cx="0" cy="0" r="60" fill="url(#meshDots)" opacity="0.56"/>
+                <!-- small gold accent lines -->
+                <g class="gold-accents" stroke="#FFD700" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
+                  <path d="M-10,-6 L10,-6" />
+                  <path d="M-6,8 L6,8" />
+                </g>
+                <!-- core center dot -->
+                <circle class="core-center" cx="0" cy="0" r="8" fill="#00D2FF" />
+              </g>
+
+            </g> <!-- end dc-assembly -->
+          </svg>
+        </div>
+      </div> <!-- /.col (right) -->
+
+    </div> <!-- /.row -->
+  </div> <!-- /.hero-inner -->
+</section>
+
+
 {% endblock %}

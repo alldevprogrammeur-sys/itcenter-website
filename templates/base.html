@@ -27,13 +27,15 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-  {% include "includes/navbar.html" %}
+  {% block navbar %}
+    {% include "includes/navbar.html" %}
+  {% endblock %}
 
   <div class="container mt-3">
     {% include "includes/messages.html" %}
   </div>
 
-  <main id="main-content" class="container my-4 flex-grow-1" role="main">
+  <main id="main-content" class="{% block main_class %}container my-4 flex-grow-1{% endblock %}" role="main">
     {% block content %}{% endblock %}
   </main>
 
