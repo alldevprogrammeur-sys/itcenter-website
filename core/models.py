@@ -189,6 +189,165 @@ class Competence(TimestampedModel):
     def __str__(self):
         return self.nom_fr or self.nom_en or self.slug
 
+class APropos(TimestampedModel):
+    """
+    Contenu institutionnel principal de la section
+    « À propos de IT CENTER ».
+
+    Singleton : une seule instance autorisée.
+    """
+
+    # Titres
+    titre_fr = models.CharField(
+        _('Titre (FR)'),
+        max_length=200,
+        blank=True,
+        help_text=_('Titre en français.')
+    )
+    titre_en = models.CharField(
+        _('Titre (EN)'),
+        max_length=200,
+        blank=True,
+        help_text=_('Titre en anglais.')
+    )
+
+    # Accroche
+    accroche_fr = models.TextField(_('Accroche (FR)'), blank=True)
+    accroche_en = models.TextField(_('Accroche (EN)'), blank=True)
+
+    # Description
+    description_fr = models.TextField(_('Description (FR)'), blank=True)
+    description_en = models.TextField(_('Description (EN)'), blank=True)
+
+    # Mission / Vision
+    mission_fr = models.TextField(_('Mission (FR)'), blank=True)
+    mission_en = models.TextField(_('Mission (EN)'), blank=True)
+
+    vision_fr = models.TextField(_('Vision (FR)'), blank=True)
+    vision_en = models.TextField(_('Vision (EN)'), blank=True)
+
+    # Illustration
+    image = models.ImageField(
+        _('Photo de IT CENTER'),
+        upload_to='a_propos/',
+        blank=True,
+        null=True
+    )
+
+    # Bouton
+    bouton_texte_fr = models.CharField(
+        _('Texte du bouton (FR)'),
+        max_length=100,
+        blank=True
+    )
+    bouton_texte_en = models.CharField(
+        _('Texte du bouton (EN)'),
+        max_length=100,
+        blank=True
+    )
+    bouton_url = models.CharField(
+        _('URL du bouton'),
+        max_length=255,
+        blank=True
+    )
+
+    actif = models.BooleanField(_('Actif'), default=True)
+
+    class Meta:
+        verbose_name = _('À propos')
+        verbose_name_plural = _('À propos')
+        ordering = ['-updated_at']
+
+    def __str__(self):
+        # Prefer French title, fallback to English, then a generic label
+        return self.titre_fr or self.titre_en or _('À propos')
+
+    def save(self, *args, **kwargs):
+        """
+        Empêche la création de plusieurs contenus principaux « À propos ».
+        """
+        if not self.pk and APropos.objects.exists():
+            raise ValidationError(
+                _('Une seule configuration À propos est autorisée.')
+            )
+        return super().save(*args, **kwargs)
+
+    @classmethod
+    def get_solo(cls):
+        """
+        Retourne l'unique contenu À propos s'il existe.
+        """
+        return cls.objects.first()
+
+
+class Valeur(TimestampedModel):
+    """
+    Valeur fondamentale de IT CENTER.
+
+    Les valeurs sont gérées séparément afin de permettre
+    un affichage dynamique sous forme de cartes/blocs.
+    """
+
+    apropos = models.ForeignKey(
+        APropos,
+        on_delete=models.CASCADE,
+        related_name='valeurs',
+        verbose_name=_('À propos')
+    )
+
+    # Titres bilingues
+    titre_fr = models.CharField(
+        _('Titre (FR)'),
+        max_length=150,
+        blank=True
+    )
+    titre_en = models.CharField(
+        _('Titre (EN)'),
+        max_length=150,
+        blank=True
+    )
+
+    # Descriptions bilingues
+    description_fr = models.TextField(
+        _('Description (FR)'),
+        blank=True
+    )
+    description_en = models.TextField(
+        _('Description (EN)'),
+        blank=True
+    )
+
+    icone = models.CharField(
+        _('Icône'),
+        max_length=100,
+        blank=True,
+        help_text=_(
+            'Nom ou classe CSS de l’icône utilisée sur le site.'
+        )
+    )
+
+    ordre = models.PositiveIntegerField(
+        _('Ordre d’affichage'),
+        default=0
+    )
+
+    actif = models.BooleanField(
+        _('Actif'),
+        default=True
+    )
+
+    class Meta:
+        verbose_name = _('Valeur')
+        verbose_name_plural = _('Valeurs')
+        ordering = ['ordre', 'titre_fr']
+        indexes = [
+            models.Index(fields=['ordre']),
+            models.Index(fields=['actif']),
+        ]
+
+    def __str__(self):
+        return self.titre_fr or self.titre_en or ''
+
 
 class Membre(TimestampedModel):
     nom_complet = models.CharField(_('Nom complet'), max_length=200, db_index=True)
@@ -256,3 +415,66 @@ class Membre(TimestampedModel):
 
     def __str__(self):
         return self.nom_complet
+
+class DomaineExpertise(TimestampedModel):
+    """
+    Domaine d'expertise présenté dans l'Accueil (Section 'Domaines d'expertise').
+
+    Stockage bilingue (FR / EN) pour titre et description.
+    """
+    titre_fr = models.CharField(
+        _('Titre (FR)'),
+        max_length=200,
+        blank=True
+    )
+    titre_en = models.CharField(
+        _('Titre (EN)'),
+        max_length=200,
+        blank=True
+    )
+
+    description_fr = models.TextField(
+        _('Description (FR)'),
+        blank=True
+    )
+    description_en = models.TextField(
+        _('Description (EN)'),
+        blank=True
+    )
+
+    icone = models.CharField(
+        _('Icône'),
+        max_length=100,
+        blank=True,
+        help_text=_('Nom ou classe CSS de l’icône utilisée sur le site.')
+    )
+
+    image = models.ImageField(
+        _('Image'),
+        upload_to='domaines_expertise/',
+        blank=True,
+        null=True
+    )
+
+    ordre = models.PositiveIntegerField(
+        _('Ordre d’affichage'),
+        default=0
+    )
+
+    actif = models.BooleanField(
+        _('Actif'),
+        default=True
+    )
+
+    class Meta:
+        verbose_name = _('Domaine d\'expertise')
+        verbose_name_plural = _('Domaines d\'expertise')
+        ordering = ['ordre', 'titre_fr']
+        indexes = [
+            models.Index(fields=['ordre']),
+            models.Index(fields=['actif']),
+        ]
+
+    def __str__(self):
+        # Priorité au titre français
+        return self.titre_fr or self.titre_en or ''

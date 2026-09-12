@@ -1,8 +1,10 @@
+# core/urls.py
 from django.urls import path
 from . import views
 
+app_name = 'core'
+
 urlpatterns = [
     path('', views.welcome, name='welcome'),
-    # Root of the site handled by core.welcome
-    path("", views.welcome, name="welcome"),
+    path('accueil/', views.accueil, name='accueil'),
 ]

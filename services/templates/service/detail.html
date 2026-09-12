@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% load bilingual %}
+
+{% block title %}{{ service|bilingual:"nom" }} | IT CENTER{% endblock %}
+{% block meta_description %}{{ service|bilingual:"description" }}{% endblock %}
+
+{% block content %}
+<article class="service-detail">
+  <h1>{{ service|bilingual:"nom" }}</h1>
+
+  {% if service.categorie %}
+    <p class="categorie">{{ service.categorie|bilingual:"nom" }}</p>
+  {% endif %}
+
+  {% if service.image_principale %}
+    <img src="{{ service.image_principale.url }}" alt="{{ service|bilingual:'nom' }}">
+  {% elif service.icone %}
+    <i class="{{ service.icone }}" aria-hidden="true"></i>
+  {% endif %}
+
+  {% if service.badge != "aucun" %}
+    <span class="badge">{{ service.get_badge_display }}</span>
+  {% endif %}
+
+  <div class="service-description">
+    {{ service|bilingual:"description" }}
+  </div>
+
+  {% if service|bilingual:"inclus" %}
+    <h2>{% trans "Ce qui est inclus" %}</h2>
+    <p>{{ service|bilingual:"inclus" }}</p>
+  {% endif %}
+
+  {% if service|bilingual:"public_cible" %}
+    <h2>{% trans "Public concerné" %}</h2>
+    <p>{{ service|bilingual:"public_cible" }}</p>
+  {% endif %}
+
+  {% if service.prix_sur_devis %}
+    <p class="prix">{% trans "Prix sur devis" %}</p>
+  {% endif %}
+</article>
+{% endblock %}

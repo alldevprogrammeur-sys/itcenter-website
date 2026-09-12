@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% load bilingual %}
+
+{% block title %}{{ formation|bilingual:"nom" }} | IT CENTER{% endblock %}
+{% block meta_description %}{{ formation|bilingual:"description" }}{% endblock %}
+
+{% block content %}
+<article class="formation-detail">
+  <h1>{{ formation|bilingual:"nom" }}</h1>
+
+  {% if formation.categorie %}
+    <p class="categorie">{{ formation.categorie|bilingual:"nom" }}</p>
+  {% endif %}
+
+  {% if formation.image_principale %}
+    <img src="{{ formation.image_principale.url }}" alt="{{ formation|bilingual:'nom' }}">
+  {% endif %}
+
+  {% if formation.badge != "aucun" %}
+    <span class="badge">{{ formation.get_badge_display }}</span>
+  {% endif %}
+
+  <div class="formation-description">
+    {{ formation|bilingual:"description" }}
+  </div>
+
+  <ul class="formation-infos">
+    {% if formation.niveau %}<li>{% trans "Niveau" %} : {{ formation.niveau }}</li>{% endif %}
+    {% if formation.duree_valeur %}<li>{% trans "Durée" %} : {{ formation.duree_valeur }} {{ formation.duree_unite }}</li>{% endif %}
+    {% if formation.prix %}<li>{% trans "Prix" %} : {{ formation.prix }} {{ formation.devise }}</li>{% endif %}
+    {% if formation.certificat %}<li>{% trans "Certificat inclus" %}</li>{% endif %}
+  </ul>
+
+  {% if formation|bilingual:"prerequis" %}
+    <h2>{% trans "Prérequis" %}</h2>
+    <p>{{ formation|bilingual:"prerequis" }}</p>
+  {% endif %}
+
+  {% if formation|bilingual:"objectif" %}
+    <h2>{% trans "Objectifs" %}</h2>
+    <p>{{ formation|bilingual:"objectif" }}</p>
+  {% endif %}
+
+  {% if formation|bilingual:"debouches" %}
+    <h2>{% trans "Débouchés" %}</h2>
+    <p>{{ formation|bilingual:"debouches" }}</p>
+  {% endif %}
+</article>
+{% endblock %}

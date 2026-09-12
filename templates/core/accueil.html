@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% load bilingual %}
+
+{% block extra_head %}
+{# CSS de la page Accueil sera ajouté à l'étape suivante #}
+{# <link rel="stylesheet" href="{% static 'css/accueil.css' %}"> #}
+{% endblock %}
+
+{% block title %}{% trans "Accueil" %} | IT CENTER{% endblock %}
+{% block meta_description %}
+  {% if apropos %}{{ apropos|bilingual:"accroche" }}{% else %}{% trans "IT CENTER - Votre partenaire technologique en RDC" %}{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- ============================= -->
+<!-- HERO ACCUEIL -->
+<!-- ============================= -->
+<section class="accueil-hero" role="region" aria-label="{% trans 'Hero Accueil' %}">
+  <div class="accueil-hero-inner">
+    <div class="accueil-hero-badge">
+      {% trans "Votre partenaire technologique en RDC" %}
+    </div>
+
+    <h1 class="accueil-hero-title">
+      {% trans "DONNONS VIE À VOS PROJETS TECHNOLOGIQUES." %}
+    </h1>
+
+    <p class="accueil-hero-text">
+      {% trans "Nous accompagnons les entreprises, les professionnels et les porteurs de projets dans leur transformation numérique, de la conception au déploiement, grâce à nos expertises en développement logiciel, réseaux, cybersécurité, systèmes et technologies IT." %}
+    </p>
+
+    <div class="accueil-hero-ctas">
+      <a class="btn btn-primary" href="/services/">{% trans "Découvrir nos services" %}</a>
+      <a class="btn btn-outline-light" href="/contact/">{% trans "Parler de mon projet" %}</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- À PROPOS -->
+<!-- ============================= -->
+{% if apropos %}
+<section class="section-apropos" id="apropos" aria-label="{% trans 'À propos' %}">
+  <div class="apropos-content">
+    {% if apropos.image %}
+      <div class="apropos-image">
+        <img src="{{ apropos.image.url }}" alt="{{ apropos|bilingual:'titre' }}">
+      </div>
+    {% endif %}
+
+    <div class="apropos-text">
+      {% if apropos|bilingual:"titre" %}
+        <h2>{{ apropos|bilingual:"titre" }}</h2>
+      {% endif %}
+
+      {% if apropos|bilingual:"accroche" %}
+        <p class="apropos-accroche">{{ apropos|bilingual:"accroche" }}</p>
+      {% endif %}
+
+      {% if apropos|bilingual:"description" %}
+        <div class="apropos-description">{{ apropos|bilingual:"description" }}</div>
+      {% endif %}
+
+      {% if apropos|bilingual:"mission" %}
+        <div class="apropos-mission">
+          <h3>{% trans "Mission" %}</h3>
+          <p>{{ apropos|bilingual:"mission" }}</p>
+        </div>
+      {% endif %}
+
+      {% if apropos|bilingual:"vision" %}
+        <div class="apropos-vision">
+          <h3>{% trans "Vision" %}</h3>
+          <p>{{ apropos|bilingual:"vision" }}</p>
+        </div>
+      {% endif %}
+
+      {% if apropos.bouton_url and apropos|bilingual:"bouton_texte" %}
+        <a class="btn btn-primary apropos-cta" href="{{ apropos.bouton_url }}">
+          {{ apropos|bilingual:"bouton_texte" }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if valeurs %}
+    <div class="valeurs-list">
+      {% for valeur in valeurs %}
+        <div class="valeur-card">
+          {% if valeur.icone %}<i class="{{ valeur.icone }}" aria-hidden="true"></i>{% endif %}
+          <h4>{{ valeur|bilingual:"titre" }}</h4>
+          <p>{{ valeur|bilingual:"description" }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+{% endif %}
+
+<!-- ============================= -->
+<!-- DOMAINES D'EXPERTISE -->
+<!-- ============================= -->
+{% if domaines_expertise %}
+<section class="section-domaines" id="domaines-expertise" aria-label="{% trans 'Domaines d expertise' %}">
+  <h2>{% trans "Nos domaines d'expertise" %}</h2>
+
+  <div class="domaines-list">
+    {% for domaine in domaines_expertise %}
+      <div class="domaine-card">
+        {% if domaine.image %}
+          <img src="{{ domaine.image.url }}" alt="{{ domaine|bilingual:'titre' }}">
+        {% elif domaine.icone %}
+          <i class="{{ domaine.icone }}" aria-hidden="true"></i>
+        {% endif %}
+        <h3>{{ domaine|bilingual:"titre" }}</h3>
+        <p>{{ domaine|bilingual:"description" }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ============================= -->
+<!-- FORMATIONS -->
+<!-- ============================= -->
+{% if formations_accueil %}
+<section class="section-formations" id="formations" aria-label="{% trans 'Formations' %}">
+  <h2>{% trans "Nos formations" %}</h2>
+
+  <div class="formations-list">
+    {% for formation in formations_accueil %}
+      <div class="formation-card">
+        {% if formation.image_principale %}
+          <img src="{{ formation.image_principale.url }}" alt="{{ formation|bilingual:'nom' }}">
+        {% endif %}
+
+        {% if formation.badge != "aucun" %}
+          <span class="badge">{{ formation.get_badge_display }}</span>
+        {% endif %}
+
+        <h3>{{ formation|bilingual:"nom" }}</h3>
+
+        {% if formation.categorie %}
+          <span class="categorie">{{ formation.categorie|bilingual:"nom" }}</span>
+        {% endif %}
+
+        <p>{{ formation|bilingual:"description" }}</p>
+
+        <ul class="formation-infos">
+          {% if formation.niveau %}<li>{% trans "Niveau" %} : {{ formation.niveau }}</li>{% endif %}
+          {% if formation.duree_valeur %}<li>{% trans "Durée" %} : {{ formation.duree_valeur }} {{ formation.duree_unite }}</li>{% endif %}
+          {% if formation.certificat %}<li>{% trans "Certificat inclus" %}</li>{% endif %}
+        </ul>
+
+        <a class="btn btn-outline-primary" href="{{ formation.get_absolute_url }}">
+          {% trans "En savoir plus" %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ============================= -->
+<!-- SERVICES -->
+<!-- ============================= -->
+{% if services_accueil %}
+<section class="section-services" id="services" aria-label="{% trans 'Services' %}">
+  <h2>{% trans "Nos services" %}</h2>
+
+  <div class="services-list">
+    {% for service in services_accueil %}
+      <div class="service-card">
+        {% if service.image_principale %}
+          <img src="{{ service.image_principale.url }}" alt="{{ service|bilingual:'nom' }}">
+        {% elif service.icone %}
+          <i class="{{ service.icone }}" aria-hidden="true"></i>
+        {% endif %}
+
+        {% if service.badge != "aucun" %}
+          <span class="badge">{{ service.get_badge_display }}</span>
+        {% endif %}
+
+        <h3>{{ service|bilingual:"nom" }}</h3>
+        <p>{{ service|bilingual:"description" }}</p>
+
+        <a class="btn btn-outline-primary" href="{{ service.get_absolute_url }}">
+          {% trans "Découvrir" %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ============================= -->
+<!-- RÉALISATIONS -->
+<!-- ============================= -->
+{% if realisations_accueil %}
+<section class="section-realisations" id="realisations" aria-label="{% trans 'Réalisations' %}">
+  <h2>{% trans "Nos réalisations" %}</h2>
+
+  <div class="realisations-list">
+    {% for realisation in realisations_accueil %}
+      <div class="realisation-card">
+        {% if realisation.image_principale %}
+          <img src="{{ realisation.image_principale.url }}" alt="{{ realisation|bilingual:'nom' }}">
+        {% endif %}
+
+        {% if realisation.badge != "aucun" %}
+          <span class="badge">{{ realisation.get_badge_display }}</span>
+        {% endif %}
+
+        <h3>{{ realisation|bilingual:"nom" }}</h3>
+
+        {% if realisation.categorie %}
+          <span class="categorie">{{ realisation.categorie|bilingual:"nom" }}</span>
+        {% endif %}
+
+        <p>{{ realisation|bilingual:"resume" }}</p>
+
+        {% if not realisation.est_confidentiel and realisation.client %}
+          <p class="realisation-client">{% trans "Client" %} : {{ realisation.client }}</p>
+        {% endif %}
+
+        <a class="btn btn-outline-primary" href="{{ realisation.get_absolute_url }}">
+          {% trans "Voir le projet" %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ============================= -->
+<!-- STATISTIQUES -->
+<!-- ============================= -->
+<section class="section-stats" id="statistiques" aria-label="{% trans 'Statistiques' %}">
+  <div class="stats-list">
+    <div class="stat-item">
+      <span class="stat-value">{{ formations_total }}</span>
+      <span class="stat-label">{% trans "Formations" %}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">{{ participants_total }}</span>
+      <span class="stat-label">{% trans "Participants" %}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">{{ formations_certifiantes }}</span>
+      <span class="stat-label">{% trans "Formations certifiantes" %}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">{{ realisations_total }}</span>
+      <span class="stat-label">{% trans "Réalisations" %}</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- TÉMOIGNAGES -->
+<!-- ============================= -->
+{% if temoignages_accueil %}
+<section class="section-temoignages" id="temoignages" aria-label="{% trans 'Témoignages' %}">
+  <h2>{% trans "Ce qu'ils disent de nous" %}</h2>
+
+  <div class="temoignages-list">
+    {% for temoignage in temoignages_accueil %}
+      <div class="temoignage-card">
+        {% if temoignage.photo %}
+          <img src="{{ temoignage.photo.url }}" alt="{{ temoignage.get_full_name }}">
+        {% endif %}
+
+        <p class="temoignage-message">{{ temoignage|bilingual:"message" }}</p>
+
+        <p class="temoignage-auteur">{{ temoignage.get_full_name }}</p>
+
+        {% if temoignage|bilingual:"fonction" %}
+          <p class="temoignage-fonction">{{ temoignage|bilingual:"fonction" }}</p>
+        {% endif %}
+
+        {% if temoignage.entreprise %}
+          <p class="temoignage-entreprise">{{ temoignage.entreprise }}</p>
+        {% endif %}
+
+        {% if temoignage.note %}
+          <span class="temoignage-note">{{ temoignage.get_note_display }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ============================= -->
+<!-- PARTENAIRES -->
+<!-- ============================= -->
+{% if partenaires_accueil %}
+<section class="section-partenaires" id="partenaires" aria-label="{% trans 'Partenaires' %}">
+  <h2>{% trans "Ils nous font confiance" %}</h2>
+
+  <div class="partenaires-list">
+    {% for partenaire in partenaires_accueil %}
+      <div class="partenaire-card">
+        {% if partenaire.logo %}
+          <img src="{{ partenaire.logo.url }}" alt="{{ partenaire.nom }}">
+        {% else %}
+          <span class="partenaire-nom">{{ partenaire.nom }}</span>
+        {% endif %}
+
+        {% if partenaire|bilingual:"description" %}
+          <p>{{ partenaire|bilingual:"description" }}</p>
+        {% endif %}
+
+        {% if partenaire.site_web %}
+          <a href="{{ partenaire.site_web }}" target="_blank" rel="noopener noreferrer">
+            {% trans "Visiter le site" %}
+          </a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ============================= -->
+<!-- CTA FINAL -->
+<!-- ============================= -->
+<section class="section-cta-final" aria-label="{% trans 'Contactez-nous' %}">
+  <h2>{% trans "Un projet ? Parlons-en." %}</h2>
+  <a class="btn btn-primary" href="/contact/">{% trans "Nous contacter" %}</a>
+</section>
+
+{% endblock %}

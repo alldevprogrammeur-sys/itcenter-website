@@ -294,3 +294,278 @@ class DepartementAdmin(
         (_("Illustration"), {"fields": ("image", "image_preview")}),
         (_("Audit"), {"fields": ("created_at", "updated_at"), "classes": ("collapse",)}),
     )
+
+# -------------------------------------------------------------------------
+# AProposAdmin (singleton)
+# -------------------------------------------------------------------------
+@admin.register(core_models.APropos)
+class AProposAdmin(
+    TimestampAdminMixin,
+    ImagePreviewMixin,
+    BaseAdmin,
+):
+    """
+    Admin for APropos (singleton).
+
+    - Une seule instance est autorisée par le modèle.
+    - L'administration permet de gérer le contenu institutionnel.
+    - L'image dispose d'un aperçu.
+    - La suppression est désactivée pour protéger la configuration.
+    """
+
+    list_display = (
+        "titre_fr",
+        "actif",
+        "updated_at",
+    )
+
+    list_filter = ("actif",)
+
+    search_fields = (
+        "titre_fr",
+        "titre_en",
+        "accroche_fr",
+        "accroche_en",
+        "description_fr",
+        "description_en",
+        "mission_fr",
+        "mission_en",
+        "vision_fr",
+        "vision_en",
+    )
+
+    readonly_fields = (
+        "image_preview",
+        "created_at",
+        "updated_at",
+    )
+
+    fieldsets = (
+        (
+            _("Contenu français"),
+            {
+                "fields": (
+                    "titre_fr",
+                    "accroche_fr",
+                    "description_fr",
+                    "bouton_texte_fr",
+                )
+            },
+        ),
+        (
+            _("Contenu anglais"),
+            {
+                "fields": (
+                    "titre_en",
+                    "accroche_en",
+                    "description_en",
+                    "bouton_texte_en",
+                )
+            },
+        ),
+        (
+            _("Mission et vision"),
+            {
+                "fields": (
+                    "mission_fr",
+                    "mission_en",
+                    "vision_fr",
+                    "vision_en",
+                )
+            },
+        ),
+        (
+            _("Illustration"),
+            {
+                "fields": (
+                    "image",
+                    "image_preview",
+                )
+            },
+        ),
+        (
+            _("Bouton d'action"),
+            {
+                "fields": (
+                    "bouton_url",
+                )
+            },
+        ),
+        (
+            _("Affichage"),
+            {
+                "fields": (
+                    "actif",
+                )
+            },
+        ),
+        (
+            _("Audit"),
+            {
+                "fields": (
+                    "created_at",
+                    "updated_at",
+                ),
+                "classes": ("collapse",),
+            },
+        ),
+    )
+
+    def has_add_permission(self, request):
+        """
+        Empêche la création d'une seconde instance.
+        """
+        if core_models.APropos.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        """
+        Désactive la suppression depuis l'administration.
+        """
+        return False
+
+    def changelist_view(self, request, extra_context=None):
+        """
+        Si l'instance existe, ouvre directement sa page de modification.
+        """
+        obj = self.get_queryset(request).first()
+
+        if obj:
+            change_url = reverse(
+                f"admin:{self.model._meta.app_label}_{self.model._meta.model_name}_change",
+                args=(obj.pk,),
+            )
+            return redirect(change_url)
+
+        return super().changelist_view(
+            request,
+            extra_context=extra_context,
+        )
+
+
+# -------------------------------------------------------------------------
+# ValeurAdmin
+# -------------------------------------------------------------------------
+@admin.register(core_models.Valeur)
+class ValeurAdmin(
+    TimestampAdminMixin,
+    BaseAdmin,
+):
+    """
+    Admin for Valeur.
+
+    Les valeurs sont des éléments indépendants liés à APropos.
+    Elles peuvent être ordonnées et activées/désactivées.
+    """
+
+    list_display = (
+        "titre_fr",
+        "apropos",
+        "ordre",
+        "actif",
+        "updated_at",
+    )
+
+    list_filter = (
+        "actif",
+        "apropos",
+    )
+
+    search_fields = (
+        "titre_fr",
+        "titre_en",
+        "description_fr",
+        "description_en",
+        "icone",
+    )
+
+    list_editable = (
+        "ordre",
+        "actif",
+    )
+
+    ordering = (
+        "ordre",
+        "titre_fr",
+    )
+
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
+
+    fieldsets = (
+        (
+            _("Informations (FR)"),
+            {
+                "fields": (
+                    "apropos",
+                    "titre_fr",
+                    "description_fr",
+                )
+            },
+        ),
+        (
+            _("Informations (EN)"),
+            {
+                "fields": (
+                    "titre_en",
+                    "description_en",
+                )
+            },
+        ),
+        (
+            _("Présentation"),
+            {
+                "fields": (
+                    "icone",
+                    "ordre",
+                    "actif",
+                )
+            },
+        ),
+        (
+            _("Audit"),
+            {
+                "fields": (
+                    "created_at",
+                    "updated_at",
+                ),
+                "classes": ("collapse",),
+            },
+        ),
+    )
+
+@admin.register(core_models.DomaineExpertise)
+class DomaineExpertiseAdmin(
+    TimestampAdminMixin,
+    ImagePreviewMixin,
+    BaseAdmin,
+):
+    """
+    Admin pour DomaineExpertise.
+    """
+
+    list_display = ('titre_fr', 'ordre', 'actif', 'updated_at')
+    list_filter = ('actif',)
+    search_fields = ('titre_fr', 'titre_en', 'description_fr', 'description_en')
+    list_editable = ('ordre', 'actif')
+    ordering = ('ordre', 'titre_fr')
+    readonly_fields = ('image_preview', 'created_at', 'updated_at')
+
+    fieldsets = (
+        (_('Contenu français'), {
+            'fields': ('titre_fr', 'description_fr'),
+        }),
+        (_('Contenu anglais'), {
+            'fields': ('titre_en', 'description_en'),
+        }),
+        (_('Présentation'), {
+            'fields': ('icone', 'image', 'image_preview', 'ordre', 'actif'),
+        }),
+        (_('Audit'), {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',),
+        }),
+    )
