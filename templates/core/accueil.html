@@ -3,14 +3,14 @@
 {% load bilingual %}
 
 {% block extra_head %}
-{# CSS de la page Accueil sera ajouté à l'étape suivante #}
-{# <link rel="stylesheet" href="{% static 'css/accueil.css' %}"> #}
+<link rel="stylesheet" href="{% static 'css/accueil.css' %}">
 {% endblock %}
 
 {% block title %}{% trans "Accueil" %} | IT CENTER{% endblock %}
 {% block meta_description %}
   {% if apropos %}{{ apropos|bilingual:"accroche" }}{% else %}{% trans "IT CENTER - Votre partenaire technologique en RDC" %}{% endif %}
 {% endblock %}
+{% block main_class %}accueil-main{% endblock %}
 
 {% block content %}
 
@@ -238,6 +238,11 @@
 <!-- STATISTIQUES -->
 <!-- ============================= -->
 <section class="section-stats" id="statistiques" aria-label="{% trans 'Statistiques' %}">
+  <div class="stats-header">
+    <h2>{% trans "Nos statistiques" %}</h2>
+    <p class="stats-intro">{% trans "Quelques chiffres qui illustrent notre engagement et nos réalisations." %}</p>
+  </div>
+
   <div class="stats-list">
     <div class="stat-item">
       <span class="stat-value">{{ formations_total }}</span>
@@ -298,7 +303,10 @@
 <!-- ============================= -->
 {% if partenaires_accueil %}
 <section class="section-partenaires" id="partenaires" aria-label="{% trans 'Partenaires' %}">
+  <div class="partenaires-header">
   <h2>{% trans "Ils nous font confiance" %}</h2>
+  <p class="partenaires-intro">{% trans "Les organisations qui collaborent avec IT CENTER et nous accordent leur confiance." %}</p>
+</div>
 
   <div class="partenaires-list">
     {% for partenaire in partenaires_accueil %}

@@ -39,3 +39,174 @@ a:focus, button:focus, input:focus, textarea:focus {
 footer {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
+
+/* =========================================================
+   NAVBAR + FOOTER — identite IT CENTER
+   Selecteurs scopes sur body > .navbar et body > footer
+   pour ne pas affecter d'autres composants.
+   ========================================================= */
+
+/* ---- Navbar : fond bleu nuit, liens blancs, survol cyan ---- */
+body > .navbar {
+  --bs-navbar-padding-y: 0.6rem;
+  --bs-navbar-color: #ffffff;
+  --bs-navbar-hover-color: #00D2FF;
+  --bs-navbar-active-color: #00D2FF;
+  --bs-navbar-disabled-color: rgba(203, 213, 225, 0.45);
+  --bs-navbar-brand-color: #ffffff;
+  --bs-navbar-brand-hover-color: #ffffff;
+  --bs-navbar-nav-link-padding-x: 0.85rem;
+  --bs-navbar-toggler-border-color: rgba(0, 210, 255, 0.4);
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-color: #0A192F !important; /* .bg-light est en !important */
+  border-bottom: 1px solid rgba(0, 210, 255, 0.18);
+}
+
+body > .navbar .navbar-brand span {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.04em;
+}
+
+body > .navbar .navbar-brand:focus-visible,
+body > .navbar .navbar-nav .nav-link:focus-visible {
+  outline: 2px solid rgba(0, 210, 255, 0.7);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---- Liens : survol cyan, trait degrade pour survol et etat actif ---- */
+body > .navbar .navbar-nav .nav-link {
+  position: relative;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+body > .navbar .navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: var(--bs-navbar-nav-link-padding-x);
+  right: var(--bs-navbar-nav-link-padding-x);
+  bottom: 0.15rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+body > .navbar .navbar-nav .nav-link:hover::after,
+body > .navbar .navbar-nav .nav-link:focus-visible::after,
+body > .navbar .navbar-nav .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+body > .navbar .navbar-nav .nav-link.active {
+  font-weight: 600;
+}
+
+/* ---- Hamburger ---- */
+body > .navbar .navbar-toggler {
+  padding: 0.4rem 0.6rem;
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+body > .navbar .navbar-toggler:hover {
+  border-color: rgba(0, 210, 255, 0.7);
+}
+
+body > .navbar .navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 210, 255, 0.3);
+}
+
+/* ---- Menu deplie sur mobile et tablette ---- */
+@media (max-width: 991.98px) {
+  body > .navbar .navbar-collapse {
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0, 210, 255, 0.18);
+  }
+  body > .navbar .navbar-nav .nav-link {
+    padding-top: 0.7rem;
+    padding-bottom: 1rem;
+  }
+  body > .navbar .navbar-nav .nav-link::after {
+    left: 0;
+    right: auto;
+    width: 2rem;
+    bottom: 0.45rem;
+  }
+}
+
+/* ---- Bande blanche entre la navbar et le contenu (conteneur des messages vide) ----
+   Les alertes, s'il y en a, gardent leur espacement. Regle facultative. */
+body > .navbar + .container.mt-3 {
+  margin-top: 0 !important;
+}
+
+body > .navbar + .container.mt-3 > .alert:first-child {
+  margin-top: 1rem;
+}
+
+/* ---- Footer : fond bleu nuit, bordure superieure cyan discrete ---- */
+body > footer,
+body > footer.bg-light {
+  background-color: #0A192F !important; /* .bg-light est en !important */
+}
+
+body > footer {
+  border-top: 1px solid rgba(0, 210, 255, 0.25);
+  color: #CBD5E1;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body > footer .row {
+  align-items: center;
+  row-gap: 0.5rem;
+}
+
+body > footer p {
+  font-size: 0.9rem;
+  color: #CBD5E1;
+}
+
+body > footer small {
+  font-size: 0.9rem;
+}
+
+body > footer .text-muted {
+  color: #CBD5E1 !important; /* .text-muted est en !important */
+}
+
+body > footer a {
+  color: #00D2FF;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+body > footer a:hover,
+body > footer a:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #00D2FF;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 767.98px) {
+  body > footer .row > [class*="col-"] {
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body > .navbar .navbar-nav .nav-link,
+  body > .navbar .navbar-nav .nav-link::after,
+  body > .navbar .navbar-toggler,
+  body > footer a {
+    transition: none;
+  }
+}

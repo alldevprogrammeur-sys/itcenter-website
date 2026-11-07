@@ -1,0 +1,1857 @@
+/* static/css/accueil.css
+   Identite visuelle globale de la page Accueil IT CENTER.
+   Cette version ajoute uniquement le style de la section "Nos services"
+   (.section-services, .services-list, .service-card) ; toutes les autres
+   sections (Hero, A propos, Formations, motif de points, formes
+   decoratives Realisations) restent strictement identiques a la
+   version deja validee.
+*/
+
+/* =========================================================
+   STRUCTURE GLOBALE DE LA PAGE
+   ========================================================= */
+
+.accueil-main {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  position: relative;
+  background: #0A192F;
+  color: #e6f0ff;
+}
+
+.accueil-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 210, 255, 0.22) 1.2px, transparent 1.2px);
+  background-size: 26px 26px;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.accueil-main h2,
+.accueil-main h3,
+.accueil-main h4 {
+  color: #ffffff;
+}
+
+.accueil-main p {
+  color: rgba(230, 240, 255, 0.85);
+}
+
+.accueil-main > section {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  position: relative;
+}
+
+.accueil-main > section > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 575.98px) {
+  .accueil-main > section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* =========================================================
+   HERO ACCUEIL
+   ========================================================= */
+
+.accueil-hero {
+  position: relative;
+  background: #0A192F;
+  color: #ffffff;
+  overflow: hidden;
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+.accueil-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 210, 255, 0.14) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.accueil-hero::after {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.35), transparent 65%);
+  pointer-events: none;
+}
+
+.accueil-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: left;
+}
+
+.accueil-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(0, 210, 255, 0.4);
+  color: #b9e8ff;
+  background: rgba(0, 210, 255, 0.06);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+.accueil-hero-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00D2FF;
+  box-shadow: 0 0 8px rgba(0, 210, 255, 0.8);
+  flex-shrink: 0;
+}
+
+.accueil-hero-title {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 1.12;
+  margin-top: 1.4rem;
+  margin-bottom: 1.2rem;
+  color: #ffffff;
+  border-left: 4px solid #00D2FF;
+  padding-left: 1.1rem;
+}
+
+.accueil-hero-text {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: rgba(230, 240, 255, 0.88);
+  max-width: 62ch;
+  margin-bottom: 2.2rem;
+}
+
+.accueil-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.accueil-hero-ctas .btn {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  padding: 0.75rem 1.4rem;
+  border-radius: 10px;
+  min-width: 200px;
+  text-align: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.accueil-hero-ctas .btn-primary {
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.22);
+}
+.accueil-hero-ctas .btn-primary:hover,
+.accueil-hero-ctas .btn-primary:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(37, 99, 235, 0.3);
+  color: #fff;
+}
+
+.accueil-hero-ctas .btn-outline-light {
+  color: #e6f0ff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+}
+.accueil-hero-ctas .btn-outline-light:hover,
+.accueil-hero-ctas .btn-outline-light:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+@media (max-width: 991.98px) {
+  .accueil-hero {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  .accueil-hero::after {
+    width: 360px;
+    height: 360px;
+    top: -100px;
+    right: -100px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .accueil-hero {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .accueil-hero-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .accueil-hero-title {
+    padding-left: 0.8rem;
+    border-left-width: 3px;
+  }
+  .accueil-hero-ctas .btn {
+    min-width: 0;
+    width: 100%;
+  }
+  .accueil-hero::after {
+    width: 260px;
+    height: 260px;
+    top: -80px;
+    right: -80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accueil-hero-ctas .btn {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   SECTION A PROPOS
+   ========================================================= */
+
+.section-apropos {
+  background: transparent;
+  padding-top: 4.5rem !important;
+  padding-bottom: 4.5rem !important;
+}
+
+.section-apropos::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 50%, #2563EB 100%);
+}
+
+.apropos-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.apropos-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  display: block;
+}
+
+.apropos-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: rgba(230, 240, 255, 0.85);
+}
+
+.apropos-text > h2 {
+  grid-column: 1 / -1;
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+  padding-left: 1rem;
+  border-left: 4px solid #00D2FF;
+}
+
+.apropos-text > p.apropos-accroche {
+  grid-column: 1 / -1;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #6FE3FF;
+  margin-bottom: 0.4rem;
+}
+
+.apropos-text > div.apropos-description {
+  grid-column: 1 / -1;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(230, 240, 255, 0.82);
+  margin-bottom: 0.6rem;
+}
+
+.apropos-mission,
+.apropos-vision {
+  background: #ffffff;
+  border: 1px solid rgba(10, 25, 47, 0.08);
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.apropos-mission h3,
+.apropos-vision h3 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #2563EB;
+  margin-bottom: 0.5rem;
+}
+
+.apropos-mission p,
+.apropos-vision p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4a5a6a;
+  margin: 0;
+}
+
+.apropos-cta {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 0.6rem;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  padding: 0.75rem 1.4rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.apropos-cta:hover,
+.apropos-cta:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(37, 99, 235, 0.36);
+  color: #fff;
+}
+
+.valeurs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+}
+
+.valeur-card {
+  background: #ffffff;
+  border: 1px solid rgba(10, 25, 47, 0.08);
+  border-radius: 14px;
+  padding: 1.6rem 1.4rem;
+  text-align: left;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.valeur-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+  border-color: rgba(0, 210, 255, 0.35);
+}
+
+.valeur-card i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(0, 210, 255, 0.1));
+  color: #2563EB;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.valeur-card h4 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0A192F;
+  margin-bottom: 0.4rem;
+}
+
+.valeur-card p {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #4a5a6a;
+  margin: 0;
+}
+
+@media (max-width: 991.98px) {
+  .apropos-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .apropos-image {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .section-apropos {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .apropos-text {
+    grid-template-columns: 1fr;
+  }
+  .apropos-text > h2 {
+    padding-left: 0.8rem;
+    border-left-width: 3px;
+  }
+  .apropos-cta {
+    width: 100%;
+    text-align: center;
+  }
+  .valeurs-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .valeur-card,
+  .apropos-cta {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   SECTION FORMATIONS
+   ========================================================= */
+
+.section-formations {
+  background: transparent;
+  padding-top: 4.5rem !important;
+  padding-bottom: 4.5rem !important;
+}
+
+.section-formations::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: -160px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.35), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-formations h2 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #ffffff;
+  margin-bottom: 2.2rem;
+  padding-left: 1rem;
+  border-left: 4px solid #00D2FF;
+}
+
+.formations-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.formation-card {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, #10264a 0%, #0A192F 100%);
+  border: 1px solid rgba(0, 210, 255, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+.formation-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 210, 255, 0.5);
+}
+
+.formation-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: #10264a;
+}
+
+.formation-card > .badge {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 1;
+}
+
+.formation-card h3,
+.formation-card .categorie,
+.formation-card p,
+.formation-card .formation-infos,
+.formation-card > a.btn {
+  margin-left: 1.4rem;
+  margin-right: 1.4rem;
+}
+
+.formation-card h3 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-top: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.formation-card .categorie {
+  display: inline-block;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6FE3FF;
+  margin-bottom: 0.6rem;
+  width: fit-content;
+}
+
+.formation-card p {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(230, 240, 255, 0.75);
+  margin-bottom: 0.9rem;
+  flex-grow: 1;
+}
+
+.formation-card .formation-infos {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.formation-card .formation-infos li {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.85rem;
+  color: rgba(230, 240, 255, 0.65);
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.formation-card .formation-infos li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00D2FF;
+}
+
+.formation-card > a.btn {
+  align-self: flex-start;
+  margin-bottom: 1.4rem;
+  margin-top: auto;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  color: #e6f0ff;
+  background: transparent;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.formation-card > a.btn:hover,
+.formation-card > a.btn:focus {
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.formation-card .badge {
+  display: inline-block;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #0A192F;
+  background: #FFD700;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+@media (max-width: 575.98px) {
+  .section-formations {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .section-formations h2 {
+    padding-left: 0.8rem;
+    border-left-width: 3px;
+  }
+  .formations-list {
+    grid-template-columns: 1fr;
+  }
+  .section-formations::after {
+    width: 260px;
+    height: 260px;
+    left: -110px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formation-card,
+  .formation-card > a.btn {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   SECTION SERVICES
+   ========================================================= */
+
+.section-services {
+  position: relative;
+  padding-top: 4.5rem !important;
+  padding-bottom: 4.5rem !important;
+}
+
+
+/* Forme circulaire neo-tech : meme langage visuel exact que le Hero,
+   repositionnee/redimensionnee pour accompagner le bloc Services sans
+   jamais passer devant les cartes (z-index 0, alors que le contenu
+   de la section est en z-index 1 via la regle .accueil-main > section > *) */
+.section-services::after {
+  content: "";
+  position: absolute;
+  bottom: -160px;
+  right: -140px;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.35), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-services h2 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #ffffff;
+  margin-bottom: 2.2rem;
+  padding-left: 1rem;
+  border-left: 4px solid #00D2FF;
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+/* Carte service : meme famille visuelle que .formation-card
+   (degrade bleu nuit, bordure cyan discrete, ombre profonde) */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, #10264a 0%, #0A192F 100%);
+  border: 1px solid rgba(0, 210, 255, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 210, 255, 0.12);
+  border-color: rgba(0, 210, 255, 0.5);
+}
+
+/* Image : hauteur homogene, coins superieurs arrondis via l'overflow
+   hidden de la carte, object-fit pour ne jamais deformer l'image */
+.service-card > img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: #10264a;
+}
+
+/* Icone (utilisee quand le service n'a pas d'image_principale) :
+   zone carree arrondie avec fond legerement lumineux, plutot qu'une
+   simple balise <i> nue de style Bootstrap par defaut */
+.service-card > i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 1.4rem 1.4rem 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(0, 210, 255, 0.18));
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  color: #6FE3FF;
+  font-size: 1.5rem;
+}
+
+/* Quand la carte n'a ni image ni icone (aucun des deux blocs Django
+   n'est rendu), le titre garde quand meme un espacement haut coherent */
+.service-card > h3:first-child {
+  margin-top: 1.4rem;
+}
+
+.service-card > .badge {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 1;
+}
+
+.service-card h3,
+.service-card p,
+.service-card > a.btn {
+  margin-left: 1.4rem;
+  margin-right: 1.4rem;
+}
+
+.service-card h3 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-top: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.service-card p {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(230, 240, 255, 0.75);
+  margin-bottom: 1.1rem;
+  flex-grow: 1;
+}
+
+.service-card > a.btn {
+  align-self: flex-start;
+  margin-bottom: 1.4rem;
+  margin-top: auto;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: 1.5px solid rgba(0, 210, 255, 0.5);
+  color: #e6f0ff;
+  background: transparent;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.service-card > a.btn:hover,
+.service-card > a.btn:focus {
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.service-card .badge {
+  display: inline-block;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #0A192F;
+  background: #FFD700;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+@media (max-width: 991.98px) {
+  .section-services::after {
+    width: 360px;
+    height: 360px;
+    bottom: -130px;
+    right: -110px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .section-services {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .section-services h2 {
+    padding-left: 0.8rem;
+    border-left-width: 3px;
+  }
+  .services-list {
+    grid-template-columns: 1fr;
+  }
+  .section-services::after {
+    width: 240px;
+    height: 240px;
+    bottom: -90px;
+    right: -80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card > a.btn {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   FORME DECORATIVE — Realisations (inchangee)
+   ========================================================= */
+
+.section-realisations {
+  position: relative;
+  padding-top: 4.5rem !important;
+  padding-bottom: 4.5rem !important;
+}
+
+.section-realisations::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  right: 6%;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.35), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 575.98px) {
+  .section-realisations::after {
+    width: 220px;
+    height: 220px;
+    right: -60px;
+  }
+}
+
+/* =========================================================
+   SECTION REALISATIONS — cartes (meme famille que Formations/Services)
+   Tous les selecteurs sont prefixes par .section-realisations
+   pour ne pas affecter les autres sections.
+   ========================================================= */
+
+.section-realisations h2 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #ffffff;
+  margin-bottom: 2.2rem;
+  padding-left: 1rem;
+  border-left: 4px solid #00D2FF;
+}
+
+.section-realisations .realisations-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+.section-realisations .realisation-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: linear-gradient(160deg, #10264a 0%, #0A192F 100%);
+  border: 1px solid rgba(0, 210, 255, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.section-realisations .realisation-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 210, 255, 0.12);
+  border-color: rgba(0, 210, 255, 0.5);
+}
+
+.section-realisations .realisation-card > img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  background: #10264a;
+}
+
+.section-realisations .realisation-card > .badge {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 1;
+  display: inline-block;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #0A192F;
+  background: #FFD700;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+.section-realisations .realisation-card > h3,
+.section-realisations .realisation-card > .categorie,
+.section-realisations .realisation-card > p,
+.section-realisations .realisation-card > a.btn {
+  margin-left: 1.4rem;
+  margin-right: 1.4rem;
+}
+
+.section-realisations .realisation-card > h3 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-top: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.section-realisations .realisation-card > .categorie {
+  display: inline-block;
+  width: fit-content;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6FE3FF;
+  margin-bottom: 0.6rem;
+}
+
+.section-realisations .realisation-card > p {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(230, 240, 255, 0.75);
+  margin-bottom: 0.9rem;
+}
+
+/* Le resume occupe l'espace libre : le bouton reste aligne en bas
+   d'une carte a l'autre, avec ou sans ligne client */
+.section-realisations .realisation-card > p:not(.realisation-client) {
+  flex-grow: 1;
+}
+
+.section-realisations .realisation-card > p.realisation-client {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6FE3FF;
+  margin-bottom: 1.1rem;
+}
+
+.section-realisations .realisation-card > a.btn {
+  align-self: flex-start;
+  margin-top: auto;
+  margin-bottom: 1.4rem;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: 1.5px solid rgba(0, 210, 255, 0.5);
+  color: #e6f0ff;
+  background: transparent;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.section-realisations .realisation-card > a.btn:hover,
+.section-realisations .realisation-card > a.btn:focus {
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 575.98px) {
+  .section-realisations {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .section-realisations h2 {
+    padding-left: 0.8rem;
+    border-left-width: 3px;
+  }
+  .section-realisations .realisations-list {
+    grid-template-columns: 1fr;
+  }
+  .section-realisations .realisation-card > img {
+    height: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-realisations .realisation-card,
+  .section-realisations .realisation-card > a.btn {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   SECTION STATISTIQUES
+   Tous les selecteurs sont prefixes par .section-stats
+   pour ne pas affecter les autres sections.
+   ========================================================= */
+
+.section-stats {
+  position: relative;
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+.section-stats .stats-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.section-stats .stat-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 2rem 1.25rem;
+  background: linear-gradient(160deg, #10264a 0%, #0A192F 100%);
+  border: 1px solid rgba(0, 210, 255, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Lueur interne discrete en haut du bloc, meme langage que les boules du site */
+.section-stats .stat-item::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.35), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-stats .stat-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 210, 255, 0.12);
+  border-color: rgba(0, 210, 255, 0.5);
+}
+
+.section-stats .stat-value,
+.section-stats .stat-label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.section-stats .stat-value {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: #ffffff; /* repli si background-clip n'est pas supporte */
+  background: linear-gradient(90deg, #ffffff 0%, #6FE3FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-stats .stat-label {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(230, 240, 255, 0.75);
+}
+
+/* Tablette : deux colonnes */
+@media (max-width: 991.98px) {
+  .section-stats .stats-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* Mobile : deux colonnes compactes */
+@media (max-width: 575.98px) {
+  .section-stats {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .section-stats .stats-list {
+    gap: 0.9rem;
+  }
+  .section-stats .stat-item {
+    padding: 1.4rem 0.8rem;
+    border-radius: 14px;
+  }
+  .section-stats .stat-value {
+    font-size: clamp(1.9rem, 9vw, 2.4rem);
+  }
+  .section-stats .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* Petits ecrans : une colonne */
+@media (max-width: 359.98px) {
+  .section-stats .stats-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-stats .stat-item {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   SECTION STATISTIQUES — titre + decors graphiques (ajout)
+   Les decors sont purement esthetiques : aucun ne represente
+   une donnee reelle (pas de pourcentage, pas d'axe, pas de legende).
+   ========================================================= */
+
+/* ---- En-tete : meme logique que Formations et Services ---- */
+.section-stats .stats-header {
+  margin-bottom: 2.2rem;
+}
+
+.section-stats .stats-header h2 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #ffffff;
+  margin: 0 0 0.7rem;
+  padding-left: 1rem;
+  border-left: 4px solid #00D2FF;
+}
+
+.section-stats .stats-header .stats-intro {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: rgba(230, 240, 255, 0.8);
+  max-width: 62ch;
+  margin: 0;
+  padding-left: 1.25rem; /* aligne le texte sur celui du titre (1rem + bordure 4px) */
+}
+
+/* ---- Arriere-plan : deux vagues fines bleu electrique / cyan ----
+   Elles passent derriere les cartes (z-index 0) et s'estompent sur les bords. */
+.section-stats::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2rem;
+  height: 140px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 140' preserveAspectRatio='none'%3E%3Cpath d='M0 70 C150 20 300 120 450 70 S750 20 900 70 S1050 120 1200 70' fill='none' stroke='%2300D2FF' stroke-opacity='0.5' stroke-width='2' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M0 100 C150 50 300 150 450 100 S750 50 900 100 S1050 150 1200 100' fill='none' stroke='%232563EB' stroke-opacity='0.7' stroke-width='2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+}
+
+/* ---- Decor commun des cartes : coin haut droit, discret ---- */
+.section-stats .stat-item::after {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 58px;
+  height: 58px;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.2s ease;
+}
+
+.section-stats .stat-item:hover::after {
+  opacity: 1;
+}
+
+/* Cartes 1 et 4 : anneau en pointilles regulier (decor, pas un camembert) */
+.section-stats .stat-item:nth-child(1)::after,
+.section-stats .stat-item:nth-child(4)::after {
+  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(circle, transparent 54%, #000 55%, #000 68%, transparent 69%);
+  mask-image: radial-gradient(circle, transparent 54%, #000 55%, #000 68%, transparent 69%);
+}
+
+.section-stats .stat-item:nth-child(1)::after {
+  background: repeating-conic-gradient(rgba(0, 210, 255, 0.6) 0deg 8deg, transparent 8deg 18deg);
+}
+
+.section-stats .stat-item:nth-child(4)::after {
+  background: repeating-conic-gradient(rgba(37, 99, 235, 0.85) 0deg 4deg, transparent 4deg 10deg);
+}
+
+/* Carte 2 : barres fines (hauteurs irregulieres, sans axe ni legende) */
+.section-stats .stat-item:nth-child(2)::after {
+  background:
+    linear-gradient(to top, rgba(0, 210, 255, 0.65), rgba(0, 210, 255, 0.05)) 0 100% / 7px 45% no-repeat,
+    linear-gradient(to top, rgba(37, 99, 235, 0.85), rgba(37, 99, 235, 0.08)) 12px 100% / 7px 80% no-repeat,
+    linear-gradient(to top, rgba(0, 210, 255, 0.65), rgba(0, 210, 255, 0.05)) 24px 100% / 7px 60% no-repeat,
+    linear-gradient(to top, rgba(37, 99, 235, 0.85), rgba(37, 99, 235, 0.08)) 36px 100% / 7px 100% no-repeat,
+    linear-gradient(to top, rgba(0, 210, 255, 0.65), rgba(0, 210, 255, 0.05)) 48px 100% / 7px 70% no-repeat;
+}
+
+/* Carte 3 : petite onde */
+.section-stats .stat-item:nth-child(3)::after {
+  width: 76px;
+  height: 36px;
+  top: 1.2rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 76 36'%3E%3Cpath d='M0 18 C10 2 20 34 38 18 S66 2 76 18' fill='none' stroke='%2300D2FF' stroke-opacity='0.85' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M0 28 C10 12 20 44 38 28 S66 12 76 28' fill='none' stroke='%232563EB' stroke-opacity='0.9' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 575.98px) {
+  .section-stats .stats-header {
+    margin-bottom: 1.6rem;
+  }
+  .section-stats .stats-header h2 {
+    padding-left: 0.8rem;
+    border-left-width: 3px;
+  }
+  .section-stats .stats-header .stats-intro {
+    padding-left: 1.05rem;
+    font-size: 0.95rem;
+  }
+  .section-stats .stat-item::after {
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 38px;
+    height: 38px;
+  }
+  .section-stats .stat-item:nth-child(3)::after {
+    width: 48px;
+    height: 24px;
+    top: 0.8rem;
+  }
+  .section-stats::before {
+    height: 100px;
+    bottom: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-stats .stat-item::after {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   SECTION TEMOIGNAGES
+   Tous les selecteurs sont prefixes par .section-temoignages
+   ========================================================= */
+
+.section-temoignages {
+  position: relative;
+  padding-top: 4.5rem !important;
+  padding-bottom: 4.5rem !important;
+}
+
+/* ---- Titre : meme style que Formations et Services ---- */
+.section-temoignages h2 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #ffffff;
+  margin-bottom: 2.2rem;
+  padding-left: 1rem;
+  border-left: 4px solid #00D2FF;
+}
+
+/* En-tete facultatif (titre + introduction) */
+.section-temoignages .temoignages-header {
+  margin-bottom: 2.2rem;
+}
+
+.section-temoignages .temoignages-header h2 {
+  margin-bottom: 0.7rem;
+}
+
+.section-temoignages .temoignages-intro {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: rgba(230, 240, 255, 0.8);
+  max-width: 62ch;
+  margin: 0;
+  padding-left: 1.25rem; /* aligne sur le texte du titre (1rem + bordure 4px) */
+}
+
+/* ---- Grille : cartes regulieres, sans etirement excessif
+   quand il y a seulement un ou deux temoignages ---- */
+.section-temoignages .temoignages-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+/* ---- Carte : message en haut, auteur en bas ---- */
+.section-temoignages .temoignage-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr repeat(4, auto);
+  padding: 1.75rem 1.5rem 1.5rem;
+  background: linear-gradient(160deg, #10264a 0%, #0A192F 100%);
+  border: 1px solid rgba(0, 210, 255, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.section-temoignages .temoignage-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 210, 255, 0.12);
+  border-color: rgba(0, 210, 255, 0.5);
+}
+
+/* Guillemet decoratif discret, derriere le contenu */
+.section-temoignages .temoignage-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 0.4rem;
+  right: 1.2rem;
+  font-family: "Poppins", "Inter", Georgia, serif;
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #00D2FF;
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-temoignages .temoignage-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Message, avec une fine separation avant les infos de l'auteur */
+.section-temoignages .temoignage-card > .temoignage-message {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin: 0 0 1.1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(0, 210, 255, 0.14);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(230, 240, 255, 0.9);
+}
+
+/* Photo en cercle (la colonne disparait si la photo n'existe pas) */
+.section-temoignages .temoignage-card > img {
+  grid-column: 1;
+  grid-row: 2 / span 3;
+  align-self: start;
+  width: 56px;
+  height: 56px;
+  margin-right: 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(0, 210, 255, 0.5);
+  background: #10264a;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+}
+
+.section-temoignages .temoignage-card > .temoignage-auteur,
+.section-temoignages .temoignage-card > .temoignage-fonction,
+.section-temoignages .temoignage-card > .temoignage-entreprise {
+  grid-column: 2;
+  margin: 0;
+}
+
+.section-temoignages .temoignage-card > .temoignage-auteur {
+  grid-row: 2;
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.section-temoignages .temoignage-card > .temoignage-fonction {
+  grid-row: 3;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #6FE3FF;
+}
+
+.section-temoignages .temoignage-card > .temoignage-entreprise {
+  grid-row: 4;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: rgba(230, 240, 255, 0.65);
+}
+
+/* Note : pastille doree (texte "4 ★") ou rangee d'etoiles (HTML facultatif) */
+.section-temoignages .temoignage-card > .temoignage-note {
+  grid-column: 1 / -1;
+  grid-row: 5;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-top: 1rem;
+  padding: 0.25rem 0.7rem;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: #FFD700;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 999px;
+}
+
+.section-temoignages .temoignage-note .star {
+  font-size: 0.95rem;
+  line-height: 1;
+  color: rgba(230, 240, 255, 0.25);
+}
+
+.section-temoignages .temoignage-note .star.is-on {
+  color: #FFD700;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 575.98px) {
+  .section-temoignages {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .section-temoignages h2 {
+    padding-left: 0.8rem;
+    border-left-width: 3px;
+  }
+  .section-temoignages .temoignages-header {
+    margin-bottom: 1.6rem;
+  }
+  .section-temoignages .temoignages-intro {
+    padding-left: 1.05rem;
+    font-size: 0.95rem;
+  }
+  .section-temoignages .temoignages-list {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .section-temoignages .temoignage-card {
+    padding: 1.4rem 1.2rem 1.3rem;
+  }
+  .section-temoignages .temoignage-card::before {
+    font-size: 3.8rem;
+    right: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-temoignages .temoignage-card {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   SECTION PARTENAIRES
+   Tous les selecteurs sont prefixes par .section-partenaires
+   ========================================================= */
+
+.section-partenaires {
+  position: relative;
+  padding-top: 4.5rem !important;
+  padding-bottom: 4.5rem !important;
+}
+
+/* ---- Titre : meme style que les autres sections ---- */
+.section-partenaires h2 {
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #ffffff;
+  margin-bottom: 2.2rem;
+  padding-left: 1rem;
+  border-left: 4px solid #00D2FF;
+}
+
+/* En-tete facultatif (titre + introduction) */
+.section-partenaires .partenaires-header {
+  margin-bottom: 2.2rem;
+}
+
+.section-partenaires .partenaires-header h2 {
+  margin-bottom: 0.7rem;
+}
+
+.section-partenaires .partenaires-intro {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: rgba(230, 240, 255, 0.8);
+  max-width: 62ch;
+  margin: 0;
+  padding-left: 1.25rem; /* aligne sur le texte du titre (1rem + bordure 4px) */
+}
+
+/* ---- Grille : cartes regulieres, sans etirement quand il y a peu de partenaires ---- */
+.section-partenaires .partenaires-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+/* ---- Carte : sobre, ombre legere ---- */
+.section-partenaires .partenaire-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem;
+  background: linear-gradient(160deg, #10264a 0%, #0A192F 100%);
+  border: 1px solid rgba(0, 210, 255, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.section-partenaires .partenaire-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 210, 255, 0.1);
+  border-color: rgba(0, 210, 255, 0.5);
+}
+
+/* ---- Zone logo : meme hauteur pour tous, proportions preservees ----
+   Fond clair doux : les logos fonces restent lisibles sur le bleu nuit. */
+.section-partenaires .partenaire-card > img {
+  display: block;
+  width: 100%;
+  height: 96px;
+  box-sizing: border-box;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.1rem;
+  object-fit: contain;
+  background: #eef4fb;
+  border-radius: 12px;
+}
+
+/* ---- Repli : nom du partenaire dans une zone de meme hauteur ---- */
+.section-partenaires .partenaire-card > .partenaire-nom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 96px;
+  box-sizing: border-box;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.1rem;
+  text-align: center;
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: #ffffff;
+  overflow-wrap: anywhere;
+  background: rgba(37, 99, 235, 0.12);
+  border: 1px solid rgba(0, 210, 255, 0.18);
+  border-radius: 12px;
+}
+
+/* ---- Description : lisible et discrete ---- */
+.section-partenaires .partenaire-card > p {
+  flex-grow: 1;
+  margin: 0 0 1.1rem;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(230, 240, 255, 0.7);
+}
+
+/* ---- Lien : meme famille que les boutons des autres cartes, pousse en bas ---- */
+.section-partenaires .partenaire-card > a {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 0.5rem 1.05rem;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #e6f0ff;
+  background: transparent;
+  border: 1.5px solid rgba(0, 210, 255, 0.5);
+  border-radius: 8px;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.section-partenaires .partenaire-card > a::after {
+  content: "\2197";
+  margin-left: 0.4rem;
+  font-size: 0.9em;
+}
+
+.section-partenaires .partenaire-card > a:hover,
+.section-partenaires .partenaire-card > a:focus {
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  border-color: transparent;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 575.98px) {
+  .section-partenaires {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .section-partenaires h2 {
+    padding-left: 0.8rem;
+    border-left-width: 3px;
+  }
+  .section-partenaires .partenaires-header {
+    margin-bottom: 1.6rem;
+  }
+  .section-partenaires .partenaires-intro {
+    padding-left: 1.05rem;
+    font-size: 0.95rem;
+  }
+  .section-partenaires .partenaires-list {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .section-partenaires .partenaire-card {
+    padding: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-partenaires .partenaire-card,
+  .section-partenaires .partenaire-card > a {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   SECTION CTA FINAL
+   Tous les selecteurs sont prefixes par .section-cta-final
+   ========================================================= */
+
+.section-cta-final {
+  position: relative;
+  text-align: center;
+  padding-top: 5.5rem !important;
+  padding-bottom: 5.5rem !important;
+}
+
+/* ---- Panneau decoratif : fond bleu nuit, degrade bleu electrique -> cyan
+   tres leger, lueurs, points et vagues fines. Purement decoratif. ---- */
+.section-cta-final::before {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, calc(100% - 3rem));
+  border-radius: 24px;
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 40px rgba(37, 99, 235, 0.18);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0 64 C150 34 300 94 450 64 S750 34 900 64 S1050 94 1200 64' fill='none' stroke='%2300D2FF' stroke-opacity='0.35' stroke-width='2' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M0 92 C150 62 300 118 450 92 S750 62 900 92 S1050 118 1200 92' fill='none' stroke='%232563EB' stroke-opacity='0.55' stroke-width='2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center bottom / 100% 110px no-repeat,
+    radial-gradient(circle at 88% 12%, rgba(0, 210, 255, 0.22), transparent 42%),
+    radial-gradient(circle at 8% 92%, rgba(37, 99, 235, 0.38), transparent 48%),
+    radial-gradient(rgba(0, 210, 255, 0.14) 1px, transparent 1px) 0 0 / 26px 26px,
+    linear-gradient(120deg, rgba(37, 99, 235, 0.30) 0%, rgba(0, 210, 255, 0.10) 100%),
+    #0A192F;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Titre ---- */
+.section-cta-final h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto 1.8rem;
+  font-family: "Poppins", "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-shadow: 0 6px 30px rgba(2, 6, 23, 0.5);
+}
+
+/* ---- Bouton : degrade bleu electrique -> cyan, zone cliquable confortable ---- */
+.section-cta-final > a.btn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: fit-content;
+  min-height: 52px;
+  margin-top: 0;
+  padding: 0.95rem 2.4rem;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  background: linear-gradient(90deg, #2563EB 0%, #00D2FF 100%);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 34px rgba(37, 99, 235, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.section-cta-final > a.btn::after {
+  content: "\2192";
+  display: inline-block;
+  font-size: 1.15em;
+  transition: transform 0.2s ease;
+}
+
+.section-cta-final > a.btn:hover,
+.section-cta-final > a.btn:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 44px rgba(0, 210, 255, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  filter: brightness(1.06);
+  color: #ffffff;
+}
+
+.section-cta-final > a.btn:hover::after,
+.section-cta-final > a.btn:focus-visible::after {
+  transform: translateX(4px);
+}
+
+.section-cta-final > a.btn:focus-visible {
+  outline: 3px solid rgba(0, 210, 255, 0.6);
+  outline-offset: 3px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 991.98px) {
+  .section-cta-final {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .section-cta-final {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  .section-cta-final::before {
+    top: 1rem;
+    bottom: 1rem;
+    width: calc(100% - 2rem);
+    border-radius: 18px;
+  }
+  .section-cta-final h2 {
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  .section-cta-final > a.btn {
+    width: 100%;
+    max-width: 340px;
+    padding: 0.95rem 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-cta-final > a.btn,
+  .section-cta-final > a.btn::after {
+    transition: none;
+  }
+}

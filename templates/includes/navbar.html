@@ -15,12 +15,12 @@
 
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="/">{% trans "Accueil" %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/formations/">{% trans "Formations" %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/services/">{% trans "Services" %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/produits/">{% trans "Produits" %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/realisations/">{% trans "Réalisations" %}</a></li>
-        <li class="nav-item"><a class="nav-link" href="/contact/">{% trans "Contact" %}</a></li>
+        <li class="nav-item"><a class="nav-link{% if request.path == '/' or request.path == '/accueil/' %} active{% endif %}" href="/"{% if request.path == '/' or request.path == '/accueil/' %} aria-current="page"{% endif %}>{% trans "Accueil" %}</a></li>
+        <li class="nav-item"><a class="nav-link{% if '/formations/' in request.path %} active{% endif %}" href="/formations/"{% if '/formations/' in request.path %} aria-current="page"{% endif %}>{% trans "Formations" %}</a></li>
+        <li class="nav-item"><a class="nav-link{% if '/services/' in request.path %} active{% endif %}" href="/services/"{% if '/services/' in request.path %} aria-current="page"{% endif %}>{% trans "Services" %}</a></li>
+        <li class="nav-item"><a class="nav-link{% if '/produits/' in request.path %} active{% endif %}" href="/produits/"{% if '/produits/' in request.path %} aria-current="page"{% endif %}>{% trans "Produits" %}</a></li>
+        <li class="nav-item"><a class="nav-link{% if '/realisations/' in request.path %} active{% endif %}" href="/realisations/"{% if '/realisations/' in request.path %} aria-current="page"{% endif %}>{% trans "Réalisations" %}</a></li>
+        <li class="nav-item"><a class="nav-link{% if '/contact/' in request.path %} active{% endif %}" href="/contact/"{% if '/contact/' in request.path %} aria-current="page"{% endif %}>{% trans "Contact" %}</a></li>
       </ul>
     </div>
   </div>
